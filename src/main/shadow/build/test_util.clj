@@ -14,9 +14,9 @@
     (if (seq namespaces)
       namespaces
       (->> (cp/find-cljs-namespaces-in-files
-             classpath
-             (when (seq test-paths)
-               (map io/file test-paths)))
+            classpath
+            (when (seq test-paths)
+              (map io/file test-paths)))
            (filter (fn [ns]
                      (re-find ns-regexp (str ns))))
            (remove exclude)
@@ -37,7 +37,6 @@
 
     (-> state
         (update-in [:sources runner-rc-id] assoc :extra-requires (set test-namespaces)))))
-
 
 (defn configure-common [state]
   (assoc-in state [:compiler-options :load-tests] true))
