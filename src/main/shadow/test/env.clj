@@ -3,7 +3,7 @@
    [cljs.env :as env]
    [cljs.analyzer :as ana]))
 
-(defmacro get-test-data []
+(defmacro get-test-data* []
   (reduce
    (fn [m {:keys [name defs] :as the-ns}]
      (let [{:syms [cljs-test-once-fixtures cljs-test-each-fixtures]}

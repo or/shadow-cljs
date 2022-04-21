@@ -33,9 +33,11 @@
   ;; it may start compiling before they actually complete
   ;; which is a problem when the runner-ns uses macros that inspect the
   ;; analyzer data to discover tests since they may still be pending
-  (let [runner-rc-id (data/get-source-id-by-provide state runner-ns)]
+  (let [runner-rc-id (data/get-source-id-by-provide state runner-ns)
+        env-rc-id (data/get-source-id-by-provide state 'shadow.test.env)]
 
     (-> state
+        (update-in [:sources env-rc-id] assoc :extra-requires (set test-namespaces))
         (update-in [:sources runner-rc-id] assoc :extra-requires (set test-namespaces)))))
 
 (defn configure-common [state]

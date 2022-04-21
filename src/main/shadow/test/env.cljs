@@ -1,5 +1,5 @@
 (ns shadow.test.env
-  (:require-macros [shadow.test.env]))
+  (:require-macros [shadow.test.env :refer [get-test-data*]]))
 
 (goog-define UI-DRIVEN false)
 
@@ -34,3 +34,6 @@
   (->> (for [{:keys [vars] :as test-ns} (-> @tests-ref (:namespaces) (vals))]
          (count vars))
        (reduce + 0)))
+
+(defn get-test-data []
+  (get-test-data*))
